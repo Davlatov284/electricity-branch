@@ -31,8 +31,8 @@ export default class UpdateCustomer extends Component {
     componentDidMount() {
         let details = localStorage.getItem('customer');
         details = JSON.parse(details);
-        let email = details.email;
-        CustomerServices.getCustIdByEmail(email).then(res => {
+        let citizenCardId = details.citizenCardId;
+        CustomerServices.getCustomerById(citizenCardId).then(res => {
             this.setState({ id: parseInt(res.data) });
             CustomerServices.getCustomerById(this.state.id).then((res) => {
                 let customer = res.data;

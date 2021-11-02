@@ -10,14 +10,14 @@ export default class CustomerRegister extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            firstName: '',
+            cardId: '',
             lastName: '',
             email: '',
             mobile: '',
             password: '',
             errors: {}
         }
-        this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
+        this.handleChangeCitizenCardId = this.handleChangeCitizenCardId.bind(this);
         this.handleChangeLastName = this.handleChangeLastName.bind(this);
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleChangeMobile = this.handleChangeMobile.bind(this);
@@ -26,8 +26,8 @@ export default class CustomerRegister extends Component{
         this.submituserRegistrationForm = this.submituserRegistrationForm.bind(this);
 
     }
-    handleChangeFirstName(e) {
-        this.setState({ firstName: e.target.value });
+    handleChangeCitizenCardId(e) {
+        this.setState({ cardId: e.target.value });
     }
     handleChangeLastName(e) {
         this.setState({ lastName: e.target.value });
@@ -54,17 +54,13 @@ export default class CustomerRegister extends Component{
 
         e.preventDefault();
 
-        if (this.validateForm()) {
 
             console.log(this.state);
 
-            var apiBaseUrl = "http://localhost:8081/springfox/api/customer/";
+            var apiBaseUrl = "http://localhost:8081/api/account/registration";
 
             var data = {
-                "firstName": this.state.firstName,
-                "lastName": this.state.lastName,
-                "email": this.state.email,
-                "mobile": this.state.mobile,
+                "username": this.state.cardId,
                 "password": this.state.password
 
             }
@@ -84,12 +80,11 @@ export default class CustomerRegister extends Component{
                 alert("Registration Successfull!! Check email for verification.")
 
             }).catch(function (error) {
-                alert(error.response.data.message);
                 console.log(error);
 
             });
 
-        }
+        
 
     }
 
@@ -229,44 +224,14 @@ export default class CustomerRegister extends Component{
 
                                 <FormGroup>
 
-                                    <Label for="exampleName">First Name</Label>
+                                    <Label for="exampleName">Citizen Card Id</Label>
 
-                                    <Input type="text" name="firstName" id="firstName" value={this.state.firstName} onChange={this.handleChangeFirstName} placeholder="Enter your first name" />
+                                    <Input type="text" name="CardId" id="cardId" value={this.state.cardId} onChange={this.handleChangeCitizenCardId} placeholder="Enter your Card Id" />
 
-                                    <div className="text-danger">{this.state.errors.firstName}</div>
-
-                                </FormGroup>
-                                <FormGroup>
-
-                                    <Label for="exampleName">Last Name</Label>
-
-                                    <Input type="text" name="lastName" id="lastName" value={this.state.lastName} onChange={this.handleChangeLastName} placeholder="Enter your last name" />
-
-                                    <div className="text-danger">{this.state.errors.lastName}</div>
+                                    <div className="text-danger">{this.state.errors.cardId}</div>
 
                                 </FormGroup>
-
-                                <FormGroup>
-
-                                    <Label for="exampleEmail">Email</Label>
-
-                                    <Input type="email" name="email" id="email" value={this.state.email} onChange={this.handleChangeEmail} placeholder="Enter a email" />
-
-                                    <div className="text-danger">{this.state.errors.email}</div>
-
-                                </FormGroup>
-
-                                <FormGroup>
-
-                                    <Label for="exampleMobile">Mobile No.</Label>
-
-                                    <Input type="text" name="mobile" id="mobile" value={this.state.mobile} onChange={this.handleChangeMobile} placeholder="Enter a Mobile No." />
-
-                                    <div className="text-danger">{this.state.errors.mobile}</div>
-
-                                </FormGroup>
-
-
+                            
 
                                 <FormGroup>
 

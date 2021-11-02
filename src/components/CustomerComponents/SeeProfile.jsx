@@ -17,8 +17,8 @@ export default class SeeProfile extends Component {
     componentDidMount() {
         let details = localStorage.getItem('customer');
         details = JSON.parse(details);
-        let email = details.email;
-        CustomerServices.getCustIdByEmail(email).then(res => {
+        let citizenCardId = details.citizenCardId;
+        CustomerServices.getCustomerById(citizenCardId).then(res => {
             this.setState({ id: parseInt(res.data) });
 
             CustomerServices.getCustomerById(this.state.id).then(res => {
@@ -45,10 +45,7 @@ export default class SeeProfile extends Component {
                             <label>Last Name: {this.state.customer.lastName} </label>
                             <div></div>
                         </div>
-                        <div className="row">
-                            <label>Email : {this.state.customer.email} </label>
-                            <div></div>
-                        </div>
+                      
                         <div className="row">
                             <label>Mobile : {this.state.customer.mobile}</label>
                             <div></div>
